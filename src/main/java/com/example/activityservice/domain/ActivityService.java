@@ -13,13 +13,39 @@ public interface ActivityService {
      */
     void saveActivity(Activity activity);
 
+    /**
+     * Save an activity from a proxy
+     *
+     * @param activityProxy the activity proxy instance
+     */
     void saveFromProxy(ActivityProxy activityProxy);
 
+    /**
+     * Find activities for a card
+     *
+     * @param cardId the card id
+     * @return a list of activities
+     */
     List<Activity> findCardActivities(Long cardId);
 
+    /**
+     * Remove activities for a card
+     *
+     * @param cardId the card id
+     */
     void removeByCard(Long cardId);
 
+    /**
+     * Remove a comment
+     *
+     * @param commentId the activity id
+     */
     void removeComment(Long commentId);
 
+    /**
+     *
+     * @param activityId
+     * @return
+     */
     Activity getActivity(long activityId);
 }

@@ -26,10 +26,8 @@ public class ActivityController {
         return activityService.getActivity(activityId);
     }
 
-    /*@DeleteMapping()
+    @DeleteMapping()
     public  void removeCommentActivity(@RequestParam("commentId") Long commentId){
         activityService.removeComment(commentId);
-    }*/
-
-
+    }
 }

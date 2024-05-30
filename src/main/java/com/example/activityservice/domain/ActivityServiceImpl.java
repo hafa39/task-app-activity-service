@@ -12,7 +12,6 @@ import java.util.List;
 @Service
 @Transactional
 public class ActivityServiceImpl implements ActivityService{
-
     private static final Logger log =
             LoggerFactory.getLogger(ActivityServiceImpl.class);
     private ActivityRepository activityRepository;
