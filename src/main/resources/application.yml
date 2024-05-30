@@ -1,0 +1,59 @@
+server:
+  tomcat:
+    keep-alive-timeout: 15s
+    connection-timeout: 2s
+    threads:
+      min-spare: 5
+      max: 50
+  port: 9005
+  shutdown: graceful
+
+spring:
+  application:
+    name: activity-service
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+  datasource:
+    url: jdbc:postgresql://localhost:5432/taskdb_activity
+    username: user
+    password: password
+    hikari:
+      maximum-pool-size: 5
+      connection-timeout: 2000
+
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/TaskAgile
+
+  cloud:
+    function:
+      definition: acceptActivity; removeActivities
+    stream:
+      bindings:
+        acceptActivity-in-0:
+          destination: activity-accepted
+          group: ${spring.application.name}
+        removeActivities-in-0:
+          destination: activity-removed
+          group: ${spring.application.name}
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
